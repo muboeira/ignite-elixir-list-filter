@@ -1,18 +1,19 @@
 defmodule ListFilter do
-  @moduledoc """
-  Documentation for `ListFilter`.
-  """
+  require Integer
 
-  @doc """
-  Hello world.
+  def call(list) do
+    Enum.reduce(list, 0, fn item, acc ->
+      case Integer.parse(item) do
+        {int, _decimal} ->
+          if Integer.is_odd(int) do
+            acc + 1
+          else
+            acc
+          end
 
-  ## Examples
-
-      iex> ListFilter.hello()
-      :world
-
-  """
-  def hello do
-    :world
+        _ ->
+          acc
+      end
+    end)
   end
 end
